@@ -190,6 +190,7 @@ export default class BookingsController {
         throw new Error("Failed, you have joined");
       }
 
+      // Check if players in booking is full
       if (booking.maxPlayers != null && booking.$extras.player_count >= booking.maxPlayers) {
         throw new Error("Failed, players are full");
       }
