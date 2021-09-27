@@ -1,0 +1,165 @@
+paths:
+  /api/v1/bookings:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      description: Endpoint for get all bookings
+      parameters:
+        - in: query
+          name: venue_id
+          required: false
+          schema:
+            type: number
+          description: venue ID
+        - in: query
+          name: start_date
+          required: false
+          schema:
+            type: string
+            format: date
+          description: star date of booking
+        - in: query
+          name: end_date
+          required: false
+          schema:
+            type: string
+            format: date
+          description: end date of booking
+      responses:
+        "200":
+          description: "Success get all data bookings"
+        "400":
+          description: "Invalid Request"
+  /api/v1/bookings/{id}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      description: Endpoint for get detail booking
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The Booking ID
+      responses:
+        "200":
+          description: "Success get detail data booking"
+        "401":
+          description: "Only user can access this route"
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      description: Endpoint for update booking
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          example: 1
+        description: The booking ID
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/definitions/Booking"
+          application/json:
+            schema:
+              $ref: "#/definitions/Booking"
+      responses:
+        "200":
+          description: "Booking updated successfully"
+        "401":
+          description: "Only user can access this route"
+        "422":
+          description: "Only creator who can update the booking"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      description: Endpoint for delete booking
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The booking ID
+      responses:
+        "200":
+          description: "Booking deleted successfully"
+        "401":
+          description: "Only user can access this route"
+        "422":
+          description: "Only creator who can delete this booking"
+  /api/v1/bookings/{id}/join:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      description: Endpoint for join booking
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The Booking ID
+      responses:
+        "200":
+          description: "Success join booking"
+        "401":
+          description: "Only user can access this route"
+        "422":
+          description: "Failed, player are full"
+  /api/v1/bookings/{id}/unjoin:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      description: Endpoint for unjoin booking
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The Booking ID
+      responses:
+        "200":
+          description: "Success unjoin booking"
+        "401":
+          description: "Only user can access this route"
+        "422":
+          description: "Failed, you haven't joined yet"
+  /api/v1/schedules:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Booking
+      description: Endpoint for get schedule user who login
+      responses:
+        "200":
+          description: "Success Get schedules"
+        "401":
+          description: "Only user can access this route"
