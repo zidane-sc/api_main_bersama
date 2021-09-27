@@ -19,8 +19,8 @@ definitions:
       field_id:
         type: integer
         example: 1
-  required:
-    - play_date_start
-    - play_date_end
-    - min_players
-    - field_id
+    required:
+      - play_date_start
+      - play_date_end
+      - min_players
+      - field_id
