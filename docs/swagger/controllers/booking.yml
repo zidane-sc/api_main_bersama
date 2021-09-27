@@ -10,8 +10,7 @@ paths:
         - in: query
           name: venue_id
           required: false
-          schema:
-            type: number
+          type: integer
           description: venue ID
         - in: query
           name: start_date

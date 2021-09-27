@@ -28,9 +28,6 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              required:
-              - email
-              - otp_code
               type: object
               properties:
                 email:
@@ -41,11 +38,11 @@ paths:
                   type: string
                   minLength: 6
                   example: 123456
+              required:
+                - email
+                - otp_code
           application/json:
             schema:
-              required:
-              - email
-              - otp_code
               type: object
               properties:
                 email:
@@ -56,6 +53,9 @@ paths:
                   type: string
                   minLength: 6
                   example: 123456
+              required:
+                - email
+                - otp_code
       responses:
         '200':
           description: 'Hooray, Verification Success'
@@ -71,24 +71,24 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              required:
-              - email
               type: object
               properties:
                 email:
                   type: string
                   format: email
                   example: mainbersama@gmail.com
+              required:
+                - email
           application/json:
             schema:
-              required:
-              - email
               type: object
               properties:
                 email:
                   type: string
                   format: email
                   example: mainbersama@gmail.com
+              required:
+                - email
       responses:
         '200':
           description: 'Resend OTP Success, please check email'
@@ -104,9 +104,6 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              required:
-              - email
-              - password
               type: object
               properties:
                 email:
@@ -116,11 +113,11 @@ paths:
                 password:
                   type: string
                   example: mainbersama123
+              required:
+                - email
+                - password
           application/json:
             schema:
-              required:
-              - email
-              - password
               type: object
               properties:
                 email:
@@ -130,6 +127,9 @@ paths:
                 password:
                   type: string
                   example: mainbersama123
+              required:
+                - email
+                - password
       responses:
         '200':
           description: 'Login Success, the token will be expire in 12 hours'
