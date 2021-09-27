@@ -106,7 +106,7 @@ export default class BookingsController {
 
       const booking = await Booking.findOrFail(id)
 
-      // check only user who create can update the data
+      // check only user who create can update this booking
       if (user.id != booking.userId) {
         throw new Error("Only creator who can update the booking");
       }
