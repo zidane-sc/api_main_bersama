@@ -1,0 +1,284 @@
+paths:
+  /api/v1/venues:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Venue
+      description: Endpoint for get all venue
+      parameters:
+        - in: query
+          name: type
+          required: false
+          schema:
+            type: string
+            enum: [soccer,minisoccer,futsal,basketball,volleyball]
+          description: type of field
+      responses:
+        "200":
+          description: "Success get all data venues"
+        "401":
+          description: "Only owner can access this route"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - Venue
+      description: Endpoint for create venue
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/definitions/Venue"
+          application/json:
+            schema:
+              $ref: "#/definitions/Venue"
+      responses:
+        "200":
+          description: "Venue added successfully"
+        "401":
+          description: "Only owner can access this route"
+        "400":
+          description: "Invalid Request"
+  /api/v1/venues/{id}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Venue
+      description: Endpoint for get detail venue
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The venue ID
+      responses:
+        "200":
+          description: "Success get detail data venue"
+        "401":
+          description: "Only owner can access this route"
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - Venue
+      description: Endpoint for update venue
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          example: 1
+        description: The venue ID
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/definitions/Venue"
+          application/json:
+            schema:
+              $ref: "#/definitions/Venue"
+      responses:
+        "200":
+          description: "Venue updated successfully"
+        "401":
+          description: "Only owner can access this route"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - Venue
+      description: Endpoint for delete venue
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The venue ID
+      responses:
+        "200":
+          description: "Venue deleted successfully"
+        "401":
+          description: "Only owner can access this route"
+  /api/v1/venues/{id}/bookings:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - Venue
+      description: Endpoint for booking field
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The venue ID
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/definitions/Booking"
+          application/json:
+            schema:
+              $ref: "#/definitions/Booking"
+      responses:
+        "200":
+          description: "Success create booking"
+        "422":
+          description: "Sorry, the field you requested is not available, try in different hours"
+        "401":
+          description: "Only user can access this route"
+  /api/v1/venues/{venue_id}/fields:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Venue
+      description: Endpoint for get all field by venue id
+      parameters:
+        - in: path
+          name: venue_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The venue ID
+      responses:
+        "200":
+          description: "Success get all data fields by venue_id"
+        "401":
+          description: "Only owner can access this route"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - Venue
+      description: Endpoint for add field
+      parameters:
+        - in: path
+          name: venue_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The venue ID
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/definitions/Field"
+          application/json:
+            schema:
+              $ref: "#/definitions/Field"
+      responses:
+        "200":
+          description: "Field added successfully"
+        "401":
+          description: "Only owner can access this route"
+  /api/v1/venues/{venue_id}/fields/{id}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - Venue
+      description: Get detail data field by venue id
+      parameters:
+        - in: path
+          name: venue_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The venue ID
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The field ID
+      responses:
+        "200":
+          description: "Success get detail data field"
+        "401":
+          description: "Only owner can access this route"
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - Venue
+      description: Endpoint for update data field
+      parameters:
+        - in: path
+          name: venue_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The venue ID
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The field ID
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/definitions/Field"
+          application/json:
+            schema:
+              $ref: "#/definitions/Field"
+      responses:
+        "200":
+          description: "Field updated successfully"
+        "401":
+          description: "Only owner can access this route"
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - Venue
+      description: Endpoint for delete field
+      parameters:
+        - in: path
+          name: venue_id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The venue ID
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+          description: The field ID
+      responses:
+        "200":
+          description: "Field deleted successfully"
+        "401":
+          description: "You do not have necessary permissions for the resource"
