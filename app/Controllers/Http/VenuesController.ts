@@ -156,6 +156,8 @@ export default class VenuesController {
             .orWhereBetween('play_date_end', [payload.play_date_start.toISO(), payload.play_date_end.toISO()])
         })
 
+      if (check.length > 0) throw new Error("Sorry, the field you requested is not available, try in different hours");
+
       const booking = await user?.related('bookings').create({
         playDateStart: payload.play_date_start,
         playDateEnd: payload.play_date_end,
