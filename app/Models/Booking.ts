@@ -15,14 +15,14 @@ export default class Booking extends BaseModel {
 
   @column.dateTime({
     serialize: (value: DateTime | null) => {
-      return value ? value.setZone('Asia/Jakarta').toFormat('y-MM-d HH:mm:ss') : value
+      return value ? value.toUTC().toFormat('y-MM-d HH:mm:ss') : value
     },
   })
   public playDateStart: DateTime
 
   @column.dateTime({
     serialize: (value: DateTime | null) => {
-      return value ? value.setZone('Asia/Jakarta').toFormat('y-MM-d HH:mm:ss') : value
+      return value ? value.toUTC().toFormat('y-MM-d HH:mm:ss') : value
     },
   })
   public playDateEnd: DateTime
